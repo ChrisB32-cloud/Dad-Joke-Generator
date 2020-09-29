@@ -4,37 +4,63 @@
     
     
   
-    /* margin-right: 10em; */
+    /* margin-left: 150px; */
     /* padding-right: 5em; */
     /* padding-left: 5em; */
-    height: 50em; 
+    /* height: 70em;  */
     /* width: 80em;  */
     /* margin-right: 40em; */
-    background-color: rgba(0,0,0,0.5);
+    /* background-color: rgba(0,0,0,0.5); */
 }
 
 
 
 
 .jokeGenBox {
-    background-color: rgba(0,0,0,0.5);
-    
-    height: 30em;
+    /* background-color: rgb(93, 153, 148); */
+    border-radius: 10px;
+    height: 20em;
     width: 18em;
     margin-left: 400px;
+    margin-right: 100px
     /* text-align: center; */
     /* margin-top: 10em; */
     
 }
 
-.jokeGenContentBtn {
-    padding-top: 150px;
+.liCont {
+    /* margin-top: 2px; */
+    padding-top: 5px;
+    /* height: 200px; */
+}
+
+.jokeGenContentSec {
+    color: azure;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    /* margin-bottom: 50px; */
+    /* background: linear-gradient(#ebbe94, #85b4e0); */
+    background-color: #ff99cc;
+    border-radius: 10px;
+}
+
+.joke-btn {
+    font-family: 'Courier New', Courier, monospace;
+    background:#212531;
+  background: linear-gradient(to right bottom,  #e09d5e 50%, #6aa3d8 50%);
+  color: azure;
+    font-weight: 550;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
 }
 
 .jokeCont {
-    background-color: rgba(0,0,0,0.5);
-    
-    height: 14em;
+    background-color: white;
+    border-radius: 5px;
+    /* color: black; */
+    height: 400px;
+    overflow: scroll;
     /* width: 50em; */
     /* margin-left: 19em;  */
     /* padding-bottom: 20em; */

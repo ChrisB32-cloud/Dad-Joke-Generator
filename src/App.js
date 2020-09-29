@@ -7,7 +7,7 @@ import JokeApiGen from './JS Component/JokeApiGen';
 function App() {
   return (
     <div className="App">
-      <h1>Main Component</h1>
+      {/* <h1>Main Component</h1> */}
       <JokeApiGen />
     </div>
   );

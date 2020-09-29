@@ -1,6 +1,42 @@
+.liCont {
+/* margin-top: 50px;     */
+}
+
+
 li {
     color: white;
-    background-color: rgba(235, 177, 177, 0.5);
+    /* background-color: rgba(235, 177, 177, 0.5); */
     text-align: start;
+    list-style-type: none;
+    /* padding-bottom: 5px; */
+    
+}
 
+p{
+    color: lightslategray;
+    text-decoration: underline;
+    /* padding-bottom: 5px; */
+
+}
+
+.liBlock {
+    margin-left: 5px;
+    
+    
+
+}
+
+.liMark {
+}
+
+button {
+    background-color: transparent;
+    outline: none;
+    border: transparent;
+    
+}
+
+.myUpArrowe {
+    background-color: transparent;
+    outline: transparent;
 }
