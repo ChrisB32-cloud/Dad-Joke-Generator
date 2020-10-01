@@ -12,7 +12,6 @@ class JokeApiGen extends Component {
 
         this.state = {
             jokes: [],
-            // scoreKeeper: 0
 
         }
 
@@ -20,7 +19,7 @@ class JokeApiGen extends Component {
         this.fetchAPI = this.fetchAPI.bind(this)
         this.handleScore = this.handleScore.bind(this)
         this.sortJokes = this.sortJokes.bind(this)
-        // this.checkId = this.checkId.bind(this)
+
 
     }
 
@@ -37,9 +36,7 @@ class JokeApiGen extends Component {
         while (i < 10) {
 
             let responce = await this.fetchAPI()
-            // responce.push({ scoreNum: 0 })
             i++
-
             // allJoke.push({ jokes: responce, scores: 0 })
             allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
 
@@ -91,23 +88,14 @@ class JokeApiGen extends Component {
 
 
     render() {
-        // this.sortJokes()
-        // this.fetchAPI()
 
         // console.log(fetchApi());
         // console.log(this.state.jokes);
-        // console.log(this.state.callMoreJokes);
-        // className='container' 
-        // this.state.jokes.map((item, idx) => {
-        //     console.log(item);
-        // })
-
         // let sortingJokes = this.state.jokes.sort(function (a, b) {
         //     return b.scores - a.scores;
         // })
 
         // console.log(sortingJokes);
-
 
 
         return (
