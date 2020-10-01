@@ -40,7 +40,8 @@ class JokeApiGen extends Component {
             // responce.push({ scoreNum: 0 })
             i++
 
-            allJoke.push({ jokes: responce, scores: 0 })
+            // allJoke.push({ jokes: responce, scores: 0 })
+            allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
 
         }
 
@@ -62,47 +63,50 @@ class JokeApiGen extends Component {
             moreJokes.push(responce)
         }
 
-        this.setState({
-            jokes: [...this.state.jokes, moreJokes.flat()].flat()
-        })
+        // this.setState({
+        //     jokes: [...this.state.jokes, moreJokes.flat()].flat()
+        // })
 
     }
 
     handleScore(idx, alpha) {
         this.setState(st => ({
             jokes: st.jokes.map(jok =>
-                jok.jokes.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
+                jok.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
             )
         }))
     }
 
 
 
-    sortJokes(jokeItems) {
-        // console.log(jokeItems);
-        // const { scoreKeeper } = jokeItems.passedJokes[0]
-
-        // console.log(id, '-', theJoke);
-
-
-
-        // console.log(testArray);
+    sortJokes() {
+        this.setState(st => ({
+            jokes: st.jokes.sort((a, b) => {
+                return b.scores - a.scores
+            })
+        }))
 
     }
 
 
 
     render() {
-
+        // this.sortJokes()
         // this.fetchAPI()
 
         // console.log(fetchApi());
-        console.log(this.state.jokes);
+        // console.log(this.state.jokes);
         // console.log(this.state.callMoreJokes);
         // className='container' 
         // this.state.jokes.map((item, idx) => {
         //     console.log(item);
         // })
+
+        // let sortingJokes = this.state.jokes.sort(function (a, b) {
+        //     return b.scores - a.scores;
+        // })
+
+        // console.log(sortingJokes);
 
 
 
@@ -120,13 +124,13 @@ class JokeApiGen extends Component {
                         {this.state.jokes.map((item, idx) => (
                             <ListJokes
                                 index={idx}
-                                jokeData={item.jokes.joke}
-                                key={item.jokes.id}
-                                id={item.jokes.id}
+                                jokeData={item.joke}
+                                key={item.id}
+                                id={item.id}
                                 score={item.scores}
                                 voteUp={this.handleScore}
                                 downVote={this.handleScore}
-                            // jokeSort={this.sortJokes}
+                                jokeSort={this.sortJokes}
                             />
 
                         ))}
