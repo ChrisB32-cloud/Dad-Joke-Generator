@@ -2,6 +2,10 @@
 /* margin-top: 50px;     */
 }
 
+ul{
+    padding: 0%;
+}
+
 
 li {
     color: white;
@@ -14,13 +18,14 @@ li {
 
 p{
     color: lightslategray;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     /* padding-bottom: 5px; */
 
 }
 
 .liBlock {
-    margin-left: 5px;
+    /* margin-left: 5px; */
+    
     
     
 
@@ -39,4 +44,8 @@ button {
 .myUpArrowe {
     background-color: transparent;
     outline: transparent;
+}
+
+.solid-line {
+    border-top: 3px solid #bbb;
 }

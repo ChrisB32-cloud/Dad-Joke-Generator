@@ -18,6 +18,8 @@ class JokeApiGen extends Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.fetchAPI = this.fetchAPI.bind(this)
+        this.handleScore = this.handleScore.bind(this)
+        this.sortJokes = this.sortJokes.bind(this)
         // this.checkId = this.checkId.bind(this)
 
     }
@@ -32,13 +34,13 @@ class JokeApiGen extends Component {
 
         let i = 0
         let allJoke = []
-        while (i < 20) {
+        while (i < 10) {
 
             let responce = await this.fetchAPI()
             // responce.push({ scoreNum: 0 })
             i++
 
-            allJoke.push(responce)
+            allJoke.push({ jokes: responce, scores: 0 })
 
         }
 
@@ -66,6 +68,28 @@ class JokeApiGen extends Component {
 
     }
 
+    handleScore(idx, alpha) {
+        this.setState(st => ({
+            jokes: st.jokes.map(jok =>
+                jok.jokes.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
+            )
+        }))
+    }
+
+
+
+    sortJokes(jokeItems) {
+        // console.log(jokeItems);
+        // const { scoreKeeper } = jokeItems.passedJokes[0]
+
+        // console.log(id, '-', theJoke);
+
+
+
+        // console.log(testArray);
+
+    }
+
 
 
     render() {
@@ -75,7 +99,10 @@ class JokeApiGen extends Component {
         // console.log(fetchApi());
         console.log(this.state.jokes);
         // console.log(this.state.callMoreJokes);
-        // className='container'
+        // className='container' 
+        // this.state.jokes.map((item, idx) => {
+        //     console.log(item);
+        // })
 
 
 
@@ -93,9 +120,15 @@ class JokeApiGen extends Component {
                         {this.state.jokes.map((item, idx) => (
                             <ListJokes
                                 index={idx}
-                                jokeData={item.joke}
-                                key={item.id}
-                                id={item.id} />
+                                jokeData={item.jokes.joke}
+                                key={item.jokes.id}
+                                id={item.jokes.id}
+                                score={item.scores}
+                                voteUp={this.handleScore}
+                                downVote={this.handleScore}
+                            // jokeSort={this.sortJokes}
+                            />
+
                         ))}
                         {/*  */}
                     </div>

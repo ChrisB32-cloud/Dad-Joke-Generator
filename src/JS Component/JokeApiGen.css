@@ -4,12 +4,12 @@
     
     
   
-    /* margin-left: 150px; */
+    /* margin-left: 300px; */
     /* padding-right: 5em; */
     /* padding-left: 5em; */
     /* height: 70em;  */
     /* width: 80em;  */
-    /* margin-right: 40em; */
+    /* margin-right: 300px; */
     /* background-color: rgba(0,0,0,0.5); */
 }
 
@@ -61,6 +61,7 @@
     /* color: black; */
     height: 400px;
     overflow: scroll;
+    /* padding: 0%; */
     /* width: 50em; */
     /* margin-left: 19em;  */
     /* padding-bottom: 20em; */
