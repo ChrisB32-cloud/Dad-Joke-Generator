@@ -19,6 +19,8 @@ class JokeApiGen extends Component {
         this.fetchAPI = this.fetchAPI.bind(this)
         this.handleScore = this.handleScore.bind(this)
         this.sortJokes = this.sortJokes.bind(this)
+        this.getJokes = this.getJokes.bind(this)
+        this.storedJoke = this.storedJoke.bind(this)
 
 
     }
@@ -29,49 +31,52 @@ class JokeApiGen extends Component {
         return things.data
     }
 
-    async componentDidMount() {
-
+    async getJokes() {
         let i = 0
         let allJoke = []
         while (i < 10) {
 
             let responce = await this.fetchAPI()
             i++
-            // allJoke.push({ jokes: responce, scores: 0 })
+
             allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
+
 
         }
 
+        // this.setState({
+        //     jokes: allJoke
+        // })
 
-        this.setState({
-            jokes: allJoke
-        })
+        this.setState(st => ({
+            jokes: [...st.jokes, allJoke].flat()
+        }))
+
+    }
+
+    componentDidMount() {
+
+        let fetchlocalstorage = localStorage.getItem('theJokes')
+        // console.log('localStorage', JSON.parse(fetchlocalstorage));
+        let hightScoreJoke = JSON.parse(fetchlocalstorage)
+
+        if (hightScoreJoke === null) {
+            this.getJokes()
+        } else {
+            this.setState({
+                jokes: hightScoreJoke
+            })
+        }
 
     }
 
     async handleClick() {
-        let i = 0
-        let moreJokes = []
-        while (i < 10) {
-            const responce = await this.fetchAPI()
-            i++
-
-            // console.log(responce.data.id);
-            moreJokes.push(responce)
-        }
-
-        // this.setState({
-        //     jokes: [...this.state.jokes, moreJokes.flat()].flat()
-        // })
+        this.getJokes()
 
     }
 
-    handleScore(idx, alpha) {
-        this.setState(st => ({
-            jokes: st.jokes.map(jok =>
-                jok.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
-            )
-        }))
+    storedJoke() {
+        localStorage.setItem('theJokes', JSON.stringify(this.state.jokes))
     }
 
 
@@ -83,20 +88,25 @@ class JokeApiGen extends Component {
             })
         }))
 
+        // localStorage.setItem('theJokes', JSON.stringify(this.state.jokes))
+        this.storedJoke()
     }
 
+    handleScore(idx, alpha) {
 
+
+        this.setState(st => ({
+            jokes: st.jokes.map(jok =>
+                jok.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
+            )
+        }))
+
+
+    }
 
     render() {
-
         // console.log(fetchApi());
         // console.log(this.state.jokes);
-        // let sortingJokes = this.state.jokes.sort(function (a, b) {
-        //     return b.scores - a.scores;
-        // })
-
-        // console.log(sortingJokes);
-
 
         return (
             <div className='container' >
@@ -130,4 +140,43 @@ class JokeApiGen extends Component {
     }
 }
 
-export default JokeApiGen; 
+export default JokeApiGen;
+
+
+// let i = 0
+        // let allJoke = []
+        // while (i < 25) {
+
+        //     let responce = await this.fetchAPI()
+        //     i++
+        //     // allJoke.push({ jokes: responce, scores: 0 })
+        //     allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
+
+        // }
+
+
+        // this.setState({
+        //     jokes: allJoke
+        // })
+
+        // let i = 0
+        // let moreJokes = []
+        // while (i < 10) {
+        //     const responce = await this.fetchAPI()
+        //     i++
+
+        //     // console.log(responce.data.id);
+        //     moreJokes.push(responce)
+        // }
+
+        // this.setState({
+        //     jokes: [...this.state.jokes, moreJokes.flat()].flat()
+        // })
+
+
+        // const testing = this.state.jokes.filter((e, i, a) => a.id.indexOf(e.id) !== i)
+        // console.log(testing);
+
+        // let unique = this.state.jokes.filter((set => f => !set.has(f.id) && set.add(f.id))(new Set));
+
+        // console.log(unique);
