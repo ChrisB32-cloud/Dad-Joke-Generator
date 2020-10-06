@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './JokeApiGen.css'
-import axios from 'axios'
+import './JokeApiGen.css';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid'
 import ListJokes from './ListJokes';
 const API_URL = "https://icanhazdadjoke.com/"
 const format_API = { headers: { Accept: "application/json" } }
@@ -16,6 +17,7 @@ class JokeApiGen extends Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.fetchAPI = this.fetchAPI.bind(this)
+        this.seenJoke = new Set(this.state.jokes.map(j => j.joke))
         this.handleScore = this.handleScore.bind(this)
         this.sortJokes = this.sortJokes.bind(this)
         this.getJokes = this.getJokes.bind(this)
@@ -29,12 +31,18 @@ class JokeApiGen extends Component {
     }
 
     async getJokes() {
-        let i = 0
+        // let i = 0
         let allJoke = []
-        while (i < 10) {
+        while (allJoke.length < 10) {
             let responce = await this.fetchAPI()
-            i++
-            allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
+
+            let newJoke = responce.joke
+            if (!this.seenJoke.has(newJoke)) {
+                allJoke.push({ id: uuidv4(), joke: newJoke, scores: 0 })
+            } else {
+                console.log('Found two', newJoke);
+            }
+
         }
 
         this.setState(st => ({
@@ -68,8 +76,6 @@ class JokeApiGen extends Component {
     storedJoke() {
         localStorage.setItem('theJokes', JSON.stringify(this.state.jokes))
     }
-
-
 
     sortJokes() {
         this.setState(st => ({
