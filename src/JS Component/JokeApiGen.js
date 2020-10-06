@@ -32,22 +32,26 @@ class JokeApiGen extends Component {
 
     async getJokes() {
         // let i = 0
-        let allJoke = []
-        while (allJoke.length < 10) {
-            let responce = await this.fetchAPI()
+        try {
+            let allJoke = []
+            while (allJoke.length < 10) {
+                let responce = await this.fetchAPI()
 
-            let newJoke = responce.joke
-            if (!this.seenJoke.has(newJoke)) {
-                allJoke.push({ id: uuidv4(), joke: newJoke, scores: 0 })
-            } else {
-                console.log('Found two', newJoke);
+                let newJoke = responce.joke
+                if (!this.seenJoke.has(newJoke)) {
+                    allJoke.push({ id: uuidv4(), joke: newJoke, scores: 0 })
+                } else {
+                    console.log('Found two', newJoke);
+                }
+
             }
 
+            this.setState(st => ({
+                jokes: [...st.jokes, allJoke].flat()
+            }))
+        } catch (e) {
+            alert(e, "Loading Error, Check Again later")
         }
-
-        this.setState(st => ({
-            jokes: [...st.jokes, allJoke].flat()
-        }))
     }
 
     componentDidMount() {
