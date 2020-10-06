@@ -12,7 +12,6 @@ class JokeApiGen extends Component {
 
         this.state = {
             jokes: [],
-
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -21,8 +20,6 @@ class JokeApiGen extends Component {
         this.sortJokes = this.sortJokes.bind(this)
         this.getJokes = this.getJokes.bind(this)
         this.storedJoke = this.storedJoke.bind(this)
-
-
     }
 
     async fetchAPI() {
@@ -35,29 +32,18 @@ class JokeApiGen extends Component {
         let i = 0
         let allJoke = []
         while (i < 10) {
-
             let responce = await this.fetchAPI()
             i++
-
             allJoke.push({ id: responce.id, joke: responce.joke, scores: 0 })
-
-
         }
-
-        // this.setState({
-        //     jokes: allJoke
-        // })
 
         this.setState(st => ({
             jokes: [...st.jokes, allJoke].flat()
         }))
-
     }
 
     componentDidMount() {
-
         let fetchlocalstorage = localStorage.getItem('theJokes')
-        // console.log('localStorage', JSON.parse(fetchlocalstorage));
         let hightScoreJoke = JSON.parse(fetchlocalstorage)
 
         if (hightScoreJoke === null) {
@@ -68,6 +54,10 @@ class JokeApiGen extends Component {
             })
         }
 
+    }
+
+    componentDidUpdate() {
+        this.storedJoke()
     }
 
     async handleClick() {
@@ -88,26 +78,20 @@ class JokeApiGen extends Component {
             })
         }))
 
-        // localStorage.setItem('theJokes', JSON.stringify(this.state.jokes))
-        this.storedJoke()
+        // this.storedJoke()
     }
 
     handleScore(idx, alpha) {
-
-
         this.setState(st => ({
             jokes: st.jokes.map(jok =>
                 jok.id === idx ? { ...jok, scores: jok.scores + alpha } : jok
             )
         }))
 
-
     }
 
     render() {
-        // console.log(fetchApi());
         // console.log(this.state.jokes);
-
         return (
             <div className='container' >
                 <div className='jokeGenBox' >
