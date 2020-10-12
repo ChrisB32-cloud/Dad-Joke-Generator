@@ -50,7 +50,7 @@ class JokeApiGen extends Component {
                 jokes: [...st.jokes, allJoke].flat()
             }))
         } catch (e) {
-            alert("Loading Error, Check Again later", e)
+            alert("Loading Error, Check back Again later", e)
         }
     }
 
